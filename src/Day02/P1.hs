@@ -1,9 +1,11 @@
 module Day02.P1 where
 
-import Data.Function
-import Data.Void
+import Control.Applicative (Alternative ((<|>)))
+import Control.Arrow ((>>>))
+import Data.Void (Void)
 import qualified Text.Megaparsec as P
-import Text.Megaparsec.Char.Lexer
+import qualified Text.Megaparsec.Char as P
+import qualified Text.Megaparsec.Char.Lexer as P
 
 solve :: a -> b
 solve = undefined
@@ -12,29 +14,37 @@ type Row = (Int, Int, Char, String)
 
 type Parser = P.Parsec Void String
 
-parseRow :: String -> Row
-parseRow str =
-  let (_min', '-' : rest) = span (/= '-') str
-      (_max', rest') = span (/= ' ') rest
-      (_char, ':' : ' ' : pass) = span (/= ':') (drop 1 rest')
-      min' = read _min'
-      max' = read _max'
-      char = head _char
-   in (min', max', char, pass)
+parseRow' :: Parser Int
+parseRow' = do
+  mn <- P.decimal <* P.char '-'
+  mx <- P.decimal <* P.spaceChar
+  c <- P.anySingle <* P.skipMany (P.char ':' <|> P.spaceChar)
+  pass <- P.manyTill P.asciiChar P.newline
+  let numCs = c `countElem` pass
+  pure $
+    fromEnum (numCs >= mn && numCs <= mx)
 
-sat :: Row -> Bool
-sat (mn, mx, c, pass) = filter (== c) pass & length & \x -> x >= mn && x <= mx
+countElem :: Eq a => a -> [a] -> Int
+countElem i = length . filter (== i)
 
-sat' :: Row -> Bool
-sat' (mn, mx, c, pass) =
-  (c == (pass !! (mn - 1)) || c == (pass !! (mx - 1)))
-    && not (c == (pass !! (mn - 1)) && c == (pass !! (mx - 1)))
+(\/) :: Bool -> Bool -> Bool
+a \/ b = (a || b) && not (a && b)
+
+infixr 3 \/
+
+(!!-) :: [a] -> Int -> a
+xs !!- i = xs !! (i - 1)
+
+parseRow'' :: Parser Int
+parseRow'' = do
+  mn <- P.decimal <* P.char '-'
+  mx <- P.decimal <* P.spaceChar
+  c <- P.anySingle <* P.skipMany (P.char ':' <|> P.spaceChar)
+  pass <- P.manyTill P.asciiChar P.newline
+  pure $
+    fromEnum (c == pass !!- mn \/ c == pass !!- mx)
 
 main :: IO ()
 main = do
-  input <- readFile "src/Day02/input"
-  input & lines
-    & map parseRow
-    & filter sat'
-    & length
-    & print
+  readFile "src/Day02/input"
+    >>= (P.runParser (P.many parseRow'') "" >>> fmap sum >>> print)

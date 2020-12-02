@@ -26,12 +26,14 @@ dependencies:
   - mtl
   - parser-combinators
   - split
+  - text
   - transformers
   - unordered-containers
 
 default-extensions:
   - BlockArguments
   - LambdaCase
+  - OverloadedStrings
   - ViewPatterns
 
 library:

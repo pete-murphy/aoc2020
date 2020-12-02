@@ -4,7 +4,7 @@ cabal-version: 1.12
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: dda1609655ea80ed1291aa6222185735bd594023631855af0f4403892a0861d3
+-- hash: 09d613ecacd27110a7e22253c448ebdbd5c72624c173e277bb88ac23fe9a38d1
 
 name:           aoc2020
 version:        0.1.0.0
@@ -34,7 +34,7 @@ library
       Paths_aoc2020
   hs-source-dirs:
       src
-  default-extensions: BlockArguments LambdaCase ViewPatterns
+  default-extensions: BlockArguments LambdaCase OverloadedStrings ViewPatterns
   build-depends:
       base >=4.7 && <5
     , containers
@@ -42,6 +42,7 @@ library
     , mtl
     , parser-combinators
     , split
+    , text
     , transformers
     , unordered-containers
   default-language: Haskell2010
@@ -52,7 +53,7 @@ executable aoc2020-exe
       Paths_aoc2020
   hs-source-dirs:
       app
-  default-extensions: BlockArguments LambdaCase ViewPatterns
+  default-extensions: BlockArguments LambdaCase OverloadedStrings ViewPatterns
   ghc-options: -threaded -rtsopts -with-rtsopts=-N
   build-depends:
       aoc2020
@@ -62,6 +63,7 @@ executable aoc2020-exe
     , mtl
     , parser-combinators
     , split
+    , text
     , transformers
     , unordered-containers
   default-language: Haskell2010
@@ -73,7 +75,7 @@ test-suite aoc2020-test
       Paths_aoc2020
   hs-source-dirs:
       test
-  default-extensions: BlockArguments LambdaCase ViewPatterns
+  default-extensions: BlockArguments LambdaCase OverloadedStrings ViewPatterns
   ghc-options: -threaded -rtsopts -with-rtsopts=-N
   build-depends:
       aoc2020
@@ -83,6 +85,7 @@ test-suite aoc2020-test
     , mtl
     , parser-combinators
     , split
+    , text
     , transformers
     , unordered-containers
   default-language: Haskell2010
