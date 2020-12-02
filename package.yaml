@@ -1,0 +1,60 @@
+name: aoc2020
+version: 0.1.0.0
+github: "ptrfrncsmrph/aoc2020"
+license: BSD3
+author: "Pete Murphy"
+maintainer: "26548438+ptrfrncsmrph@users.noreply.github.com"
+copyright: "2020 Pete Murphy"
+
+extra-source-files:
+  - README.md
+  - ChangeLog.md
+
+# Metadata used when publishing your package
+# synopsis:            Short description of your package
+# category:            Web
+
+# To avoid duplicated efforts in documentation and dealing with the
+# complications of embedding Haddock markup inside cabal files, it is
+# common to point users to the README.md file.
+description: Please see the README on GitHub at <https://github.com/ptrfrncsmrph/aoc2020#readme>
+
+dependencies:
+  - base >= 4.7 && < 5
+  - containers
+  - megaparsec
+  - mtl
+  - parser-combinators
+  - split
+  - transformers
+  - unordered-containers
+
+default-extensions:
+  - BlockArguments
+  - LambdaCase
+  - ViewPatterns
+
+library:
+  source-dirs: src
+
+executables:
+  aoc2020-exe:
+    main: Main.hs
+    source-dirs: app
+    ghc-options:
+      - -threaded
+      - -rtsopts
+      - -with-rtsopts=-N
+    dependencies:
+      - aoc2020
+
+tests:
+  aoc2020-test:
+    main: Spec.hs
+    source-dirs: test
+    ghc-options:
+      - -threaded
+      - -rtsopts
+      - -with-rtsopts=-N
+    dependencies:
+      - aoc2020
