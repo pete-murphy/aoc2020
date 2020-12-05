@@ -4,7 +4,7 @@ cabal-version: 1.12
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: 7fc92ce7def8c81f4993eae981f4410da50499c30678c1e5f40e8f38bb80a0ef
+-- hash: 141b828fb0c4695fdaf2384594926c3f0b3d5cacef5908f04643834c9b3134b7
 
 name:           aoc2020
 version:        0.1.0.0
@@ -27,18 +27,22 @@ source-repository head
 
 library
   exposed-modules:
-      Day01.P1
-      Day02.P1
-      Day03.P1
+      AOCPrelude
+      Day01.Main
+      Day02.Main
+      Day03.Main
+      Day04.Main
+      Day05.Main
       Lib
   other-modules:
       Paths_aoc2020
   hs-source-dirs:
       src
-  default-extensions: BlockArguments LambdaCase OverloadedStrings ViewPatterns
+  default-extensions: BlockArguments LambdaCase NoImplicitPrelude OverloadedStrings ViewPatterns
   build-depends:
       base >=4.7 && <5
     , containers
+    , extra
     , megaparsec
     , mtl
     , parser-combinators
@@ -54,12 +58,13 @@ executable aoc2020-exe
       Paths_aoc2020
   hs-source-dirs:
       app
-  default-extensions: BlockArguments LambdaCase OverloadedStrings ViewPatterns
+  default-extensions: BlockArguments LambdaCase NoImplicitPrelude OverloadedStrings ViewPatterns
   ghc-options: -threaded -rtsopts -with-rtsopts=-N
   build-depends:
       aoc2020
     , base >=4.7 && <5
     , containers
+    , extra
     , megaparsec
     , mtl
     , parser-combinators
@@ -76,12 +81,13 @@ test-suite aoc2020-test
       Paths_aoc2020
   hs-source-dirs:
       test
-  default-extensions: BlockArguments LambdaCase OverloadedStrings ViewPatterns
+  default-extensions: BlockArguments LambdaCase NoImplicitPrelude OverloadedStrings ViewPatterns
   ghc-options: -threaded -rtsopts -with-rtsopts=-N
   build-depends:
       aoc2020
     , base >=4.7 && <5
     , containers
+    , extra
     , megaparsec
     , mtl
     , parser-combinators
