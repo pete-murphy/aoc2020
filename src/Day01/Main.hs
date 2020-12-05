@@ -1,7 +1,8 @@
 {-# LANGUAGE BlockArguments #-}
 
-module Day01.P1 where
+module Day01.Main where
 
+import AOCPrelude
 import Control.Monad (guard)
 import Data.Function
 import Data.List (tails)

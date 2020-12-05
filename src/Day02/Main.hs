@@ -1,5 +1,6 @@
-module Day02.P1 where
+module Day02.Main where
 
+import AOCPrelude
 import Control.Applicative (Alternative ((<|>)))
 import Control.Arrow ((>>>))
 import Data.Void (Void)

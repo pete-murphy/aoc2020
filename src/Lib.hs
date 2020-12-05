@@ -1,6 +1,9 @@
 module Lib
-    ( someFunc
-    ) where
+  ( someFunc,
+  )
+where
+
+import AOCPrelude
 
 someFunc :: IO ()
 someFunc = putStrLn "someFunc"
