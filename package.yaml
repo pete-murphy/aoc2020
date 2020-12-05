@@ -26,6 +26,7 @@ dependencies:
   - megaparsec
   - mtl
   - parser-combinators
+  - profunctors
   - split
   - text
   - transformers
@@ -33,9 +34,13 @@ dependencies:
 
 default-extensions:
   - BlockArguments
+  - GADTs
+  - InstanceSigs
   - LambdaCase
   - NoImplicitPrelude
   - OverloadedStrings
+  - RankNTypes
+  - ScopedTypeVariables
   - ViewPatterns
 
 library:

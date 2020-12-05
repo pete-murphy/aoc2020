@@ -1,9 +1,11 @@
 module AOCPrelude
   ( module P,
+    parse,
   )
 where
 
 import Control.Applicative as P
+import Control.Arrow as P hiding (first, second)
 import Control.Monad as P
 import Control.Monad.Combinators as P hiding (endBy, many, option, some)
 import Control.Monad.Except as P
@@ -36,7 +38,6 @@ import Data.Void as P
 import Debug.Trace as P
 import GHC.Base as P hiding (Any, foldr, mapM, sequence)
 import GHC.Enum as P
--- import GHC.Char as P
 import GHC.Generics as P (Generic)
 import GHC.Num as P
 import GHC.Real as P
@@ -44,9 +45,11 @@ import GHC.Show as P
 import Numeric.Natural as P
 import System.IO as P
 import System.IO.Unsafe as P
-import Text.Megaparsec as P (Parsec, anySingle, anySingleBut, eof, noneOf, oneOf, satisfy, try)
+import Text.Megaparsec as P (Parsec, anySingle, anySingleBut, eof, noneOf, oneOf, parseTest, runParser, satisfy, try)
 import Text.Megaparsec.Char as P (asciiChar, binDigitChar, char, digitChar, hexDigitChar, newline, octDigitChar, space, space1, string, string')
 import Text.Megaparsec.Char.Lexer as P (binary, decimal, float, hexadecimal, octal, scientific, signed)
 import Text.Printf as P
 import Text.Read as P (read, readMaybe)
 import Unsafe.Coerce as P
+
+parse p = runParser p ""
