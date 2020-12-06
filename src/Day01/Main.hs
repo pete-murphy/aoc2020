@@ -3,9 +3,6 @@
 module Day01.Main where
 
 import AOCPrelude
-import Control.Monad (guard)
-import Data.Function
-import Data.List (tails)
 
 solve :: [Int] -> Int
 solve xs = head do

@@ -1,11 +1,6 @@
 module Day04.Main where
 
 import AOCPrelude
-import Data.Char
-import Data.Function
-import Data.List.Split (splitOn)
-import Data.Maybe
-import Text.Read
 
 main :: IO ()
 main = do
