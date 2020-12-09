@@ -43,6 +43,7 @@ default-extensions:
   - OverloadedStrings
   - RankNTypes
   - ScopedTypeVariables
+  - TupleSections
   - ViewPatterns
 
 library:

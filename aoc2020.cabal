@@ -4,7 +4,7 @@ cabal-version: 1.12
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: 6ad488278083ce46acbca9811a2d34a0a5e7d31e4555a6a20d70b865e3e017f2
+-- hash: 62caed9887ca87f4731cb2ee77bb6fcb07d5425ced8ca685de372b2e82dfb71d
 
 name:           aoc2020
 version:        0.1.0.0
@@ -36,12 +36,13 @@ library
       Day06.Main
       Day07.Main
       Day08.Main
+      Day09.Main
       Lib
   other-modules:
       Paths_aoc2020
   hs-source-dirs:
       src
-  default-extensions: BlockArguments GADTs InstanceSigs LambdaCase NoImplicitPrelude OverloadedStrings RankNTypes ScopedTypeVariables ViewPatterns
+  default-extensions: BlockArguments GADTs InstanceSigs LambdaCase NoImplicitPrelude OverloadedStrings RankNTypes ScopedTypeVariables TupleSections ViewPatterns
   build-depends:
       base >=4.7 && <5
     , containers
@@ -64,7 +65,7 @@ executable aoc2020-exe
       Paths_aoc2020
   hs-source-dirs:
       app
-  default-extensions: BlockArguments GADTs InstanceSigs LambdaCase NoImplicitPrelude OverloadedStrings RankNTypes ScopedTypeVariables ViewPatterns
+  default-extensions: BlockArguments GADTs InstanceSigs LambdaCase NoImplicitPrelude OverloadedStrings RankNTypes ScopedTypeVariables TupleSections ViewPatterns
   ghc-options: -threaded -rtsopts -with-rtsopts=-N
   build-depends:
       aoc2020
@@ -90,7 +91,7 @@ test-suite aoc2020-test
       Paths_aoc2020
   hs-source-dirs:
       test
-  default-extensions: BlockArguments GADTs InstanceSigs LambdaCase NoImplicitPrelude OverloadedStrings RankNTypes ScopedTypeVariables ViewPatterns
+  default-extensions: BlockArguments GADTs InstanceSigs LambdaCase NoImplicitPrelude OverloadedStrings RankNTypes ScopedTypeVariables TupleSections ViewPatterns
   ghc-options: -threaded -rtsopts -with-rtsopts=-N
   build-depends:
       aoc2020
