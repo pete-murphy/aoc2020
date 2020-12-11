@@ -10,25 +10,19 @@ parse1 =
     >>> concat
     >>> M.fromAscList
 
--- >>> \xs -> array ((0, 0), (length xs - 1, length (head xs) - 1)) xs
-
 p1 =
-  parse1 >>> nTimes 219 tick
+  parse1 >>> repeatUntilDone tick
     >>> M.filter (== '#')
     >>> length
 
-nTimes :: Int -> (a -> a) -> a -> a
-nTimes 0 _ a = a
-nTimes n f a = f (nTimes (n -1) f a)
-
 repeatUntilDone :: Eq a => (a -> a) -> a -> a
-repeatUntilDone f xs = if f xs == xs then xs else repeatUntilDone f xs
+repeatUntilDone f xs = go (f xs) xs
+  where
+    go curr last = if curr == last then curr else go (f curr) curr
 
 tick :: Map (Int, Int) Char -> Map (Int, Int) Char
 tick mp =
   M.mapWithKey (\i seat -> tick' seat (getNeighbors mp i)) mp
-
--- listArray (bounds xs) (fmap (\ix -> tick' (xs ! ix) (getNeighbors xs ix)) (indices xs))
 
 tick' :: Char -> [Char] -> Char
 tick' 'L' ns
@@ -53,9 +47,47 @@ getNeighbors xs (i, j) =
             (i + 1, j - 1)
           ]
 
+--- p2
+
+getNeighbors2 :: Map (Int, Int) Char -> (Int, Int) -> [Char]
+getNeighbors2 xs (i, j) =
+  catMaybes $
+    (\xs -> if null xs then Nothing else head xs)
+      . dropWhile (== Just '.')
+      . takeWhile isJust
+      . map (xs M.!?)
+      <$> [ [i - 1, i - 2 ..] `zip` [j - 1, j - 2 ..],
+            repeat i `zip` [j - 1, j - 2 ..],
+            [i - 1, i - 2 ..] `zip` repeat j,
+            repeat i `zip` [j + 1, j + 2 ..],
+            [i + 1, i + 2 ..] `zip` repeat j,
+            [i + 1, i + 2 ..] `zip` [j + 1, j + 2 ..],
+            [i - 1, i - 2 ..] `zip` [j + 1, j + 2 ..],
+            [i + 1, i + 2 ..] `zip` [j - 1, j - 2 ..]
+          ]
+
+tick2 :: Map (Int, Int) Char -> Map (Int, Int) Char
+tick2 mp =
+  M.mapWithKey (\i seat -> tick2' seat (getNeighbors2 mp i)) mp
+
+tick2' :: Char -> [Char] -> Char
+tick2' 'L' ns
+  | '#' `notElem` ns = '#'
+  | otherwise = 'L'
+tick2' '#' ns
+  | '#' `countElem` ns >= 5 = 'L'
+  | otherwise = '#'
+tick2' s _ = s
+
+p2 =
+  parse1 >>> repeatUntilDone tick2
+    >>> M.filter (== '#')
+    >>> length
+
 main = do
   input <- readFile "src/Day11/input"
-  print (p1 input)
+  -- print (p1 input)
+  print (p2 input)
 
 countElem :: Eq a => a -> [a] -> Int
 countElem i = length . filter (== i)
