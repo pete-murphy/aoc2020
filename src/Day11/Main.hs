@@ -66,9 +66,13 @@ getNeighbors2 xs (i, j) =
             [i + 1, i + 2 ..] `zip` [j - 1, j - 2 ..]
           ]
 
+draw :: Map (Int, Int) Char -> [String]
+draw = M.toAscList >>> splitWhen (\((_, x), _) -> x == 0) >>> map (map snd)
+
 tick2 :: Map (Int, Int) Char -> Map (Int, Int) Char
 tick2 mp =
-  M.mapWithKey (\i seat -> tick2' seat (getNeighbors2 mp i)) mp
+  unsafePerformIO (hSetBuffering stdout NoBuffering *> hPrint stdout (draw mp))
+    `seq` M.mapWithKey (\i seat -> tick2' seat (getNeighbors2 mp i)) mp
 
 tick2' :: Char -> [Char] -> Char
 tick2' 'L' ns
