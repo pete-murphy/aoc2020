@@ -34,6 +34,7 @@ import Data.Text as P (Text)
 import Data.Text.Encoding as P (decodeUtf8, encodeUtf8)
 import Data.Traversable as P
 import Data.Tuple as P
+import Data.Vector as P (Vector)
 import Data.Void as P
 import Debug.Trace as P
 import GHC.Base as P hiding (Any, foldr, mapM, sequence)
